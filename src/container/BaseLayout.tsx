@@ -8,6 +8,7 @@ import QtHeader from './Header'
 import QtFooter from './Footer'
 import menu from '../config/menu'
 import routes from '../config/routes'
+import "@/styles/layout.scss"
 
 const { Content, Sider } = Layout;
 
@@ -19,7 +20,7 @@ const BaseLayout = (props: any) => {
   }
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout className='app'>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className="logo" style={{ height: 55 }} />
         <Menu style={{ height: '100%' }} theme="dark" defaultSelectedKeys={['1']} mode='inline'>
@@ -36,7 +37,7 @@ const BaseLayout = (props: any) => {
       <Layout className="site-layout">
         <QtHeader />
         <Spin spinning={false}>
-          <Content style={{ margin: '0 10px' }}>
+          <Content className='content'>
             <Breadcrumb style={{ margin: '10px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
@@ -45,7 +46,7 @@ const BaseLayout = (props: any) => {
               <Switch>
                 {routes.map(item => {
                   console.log(item)
-                  return <Route key={item.path} path={item.path} exact={item.exact} render={(props: any) => <item.component {...props}/>} />
+                  return <Route key={item.path} path={item.path} exact={item.exact} render={(props: any) => <item.component {...props} />} />
                 })}
               </Switch>
             </div>
