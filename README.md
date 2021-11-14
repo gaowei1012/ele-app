@@ -1,1 +1,1 @@
-- ele-app
+- resource-app
