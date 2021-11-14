@@ -1,8 +1,18 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const isDev = require('electron-is-dev')
 const path = require('path')
 
 let mainWindow;
+
+// 自定义 dockMenu
+const dockMenu = Menu.buildFromTemplate([
+  {
+    label: 'New Window',
+    click() {
+      console.log('new window')
+    }
+  }
+])
 
 // 创建窗体
 function createWindow() {
@@ -23,7 +33,14 @@ function createWindow() {
     mainWindow = null
   });
 }
+
 app.on('ready', createWindow)
+
+app.whenReady().then(() => {
+  if (process.platform === 'darwin') {
+    app.dock.setMenu(dockMenu)
+  }
+})
 
 app.on('window-all-closed', () => {
   if (process.platform != 'darwin') app.quit()
